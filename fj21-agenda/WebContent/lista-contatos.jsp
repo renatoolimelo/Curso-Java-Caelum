@@ -7,15 +7,15 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+				<style type="text/css">
+				tr:nth-child(even) {background: #CCC}
+				tr:nth-child(odd) {background: #FFF}
+			</style>
 	</head>
 	<body>
 		<c:import url="cabecalho.jsp"></c:import>
 		<jsp:useBean id="dao" class="br.com.caelum.agenda.dao.ContatoDao" />
 		<table>
-			<style type="text/css">
-				tr:nth-child(even) {background: #CCC}
-				tr:nth-child(odd) {background: #FFF}
-			</style>
 			<tr>
 				<td>Nome</td>
 				<td>E-mail</td>
