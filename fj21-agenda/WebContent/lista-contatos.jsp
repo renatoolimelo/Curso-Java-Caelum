@@ -24,14 +24,15 @@
 			<c:forEach var="contato" items="${contatos}">
 				<tr>
 					<td>${contato.nome}</td>
-					<td><c:if test="${not empty contato.email}"></c:if> <a
-						href="mailto:${contato.email}">${contato.email}</a> <c:if
-							test="${empty contato.email}">
-								E-mail não informado
-							</c:if></td>
+					<td>
+						<c:if test="${not empty contato.email}"></c:if>
+						<a href="mailto:${contato.email}">${contato.email}</a>
+						<c:if test="${empty contato.email}"> E-mail não informado</c:if>
+					</td>
 					<td>${contato.endereco}</td>
 					<td><fmt:formatDate value="${contato.dataNascimento.time}"
-							pattern="dd/MM/yyyy" /></td>
+							pattern="dd/MM/yyyy" />
+					</td>
 					<td>
 						<a href="mvc?logica=RemoveContatoLogica&id=${contato.id}">Remover</a>
 					</td>

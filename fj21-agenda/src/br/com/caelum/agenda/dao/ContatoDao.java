@@ -51,20 +51,20 @@ public class ContatoDao {
 
 			ResultSet rs = stmt.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 				Contato contato = new Contato();
-				//popula o objeto contato
+				// popula o objeto contato
 				contato.setId(rs.getLong("id"));
 				contato.setNome(rs.getString("nome"));
 				contato.setEmail(rs.getString("email"));
 				contato.setEndereco(rs.getString("endereco"));
 
-				//popula a data de nascimento do contato, fazendo a conversao
+				// popula a data de nascimento do contato, fazendo a conversao
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("dataNascimento"));
 				contato.setDataNascimento(data);
 
-				//adiciona o contato na lista
+				// adiciona o contato na lista
 				contatos.add(contato);
 			}
 
@@ -99,6 +99,30 @@ public class ContatoDao {
 			stmt.setLong(5, contato.getId());
 
 			stmt.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public Contato consultaContato(long id) {
+		try {
+			PreparedStatement stmt = this.connection.prepareStatement("select * from contatos where id = " + id);
+
+			ResultSet rs = stmt.executeQuery();
+
+			Contato contato = new Contato();
+			contato.setId(rs.getLong("id"));
+			contato.setNome(rs.getString("nome"));
+			contato.setEmail(rs.getString("email"));
+			contato.setEndereco(rs.getString("endereco"));
+			Calendar data = Calendar.getInstance();
+			data.setTime(rs.getDate("dataNascimento"));
+			contato.setDataNascimento(data);
+
+			rs.close();
+			stmt.close();
+
+			return contato;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
